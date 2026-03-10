@@ -33,7 +33,7 @@ export function buildPesanTagihCOD(packagesList) {
 
     const firstPkg = packages.find(p => p.telp) || packages[0]
     const namaUpper = firstPkg.nama ? firstPkg.nama.toUpperCase() : '____________'
-    
+
     const resis = packages.map(p => p.resi || '____________').join(', ')
     const totalCod = packages.reduce((sum, p) => sum + (parseInt(p.nominal) || 0), 0)
     const nominalFmt = totalCod > 0 ? formatRupiah(totalCod) : '0'
@@ -49,7 +49,7 @@ export function buildPesanTTD(packagesList) {
 
     const firstPkg = packages.find(p => p.telp) || packages[0]
     const namaUpper = firstPkg.nama ? firstPkg.nama.toUpperCase() : '____________'
-    
+
     const resis = packages.map(p => p.resi || '____________').join(', ')
     const paketText = packages.length > 1 ? `${packages.length} paket` : `paket`
 
