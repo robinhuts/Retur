@@ -51,12 +51,13 @@ export default function MarkerView({ packages, config, currentView, setCurrentVi
         }))
     }
 
-    function handleKirimWA(pkg) {
-        if (!pkg.telp) { showToast('No. HP tidak tersedia', 'warn'); return }
+    function handleKirimWAGroup(groupArray) {
+        const pkgWithPhone = groupArray.find(p => p.telp) || groupArray[0]
+        if (!pkgWithPhone.telp) { showToast('No. HP tidak tersedia', 'warn'); return }
         const pesan = config.markerType === MARKER_BELUM_TTD
-            ? buildPesanTagihCOD(pkg)
-            : buildPesanTTD(pkg)
-        const nomor = konversiTelp(pkg.telp)
+            ? buildPesanTagihCOD(groupArray)
+            : buildPesanTTD(groupArray)
+        const nomor = konversiTelp(pkgWithPhone.telp)
         window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, '_blank', 'noopener,noreferrer')
         showToast('WhatsApp sedang dibuka...', 'info')
     }
@@ -122,9 +123,11 @@ export default function MarkerView({ packages, config, currentView, setCurrentVi
                         
                         return (
                             <div key={`group-${idx}`} className="bg-slate-100 dark:bg-slate-900/40 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col gap-2 shadow-inner">
-                                <button 
+                                <div 
                                     onClick={() => toggleGroup(idx)}
-                                    className="px-2 pt-1 pb-1 flex justify-between items-center w-full text-left"
+                                    role="button"
+                                    tabIndex={0}
+                                    className="px-2 pt-1 pb-1 flex justify-between items-center w-full text-left cursor-pointer"
                                 >
                                     <span className="flex flex-col">
                                         <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-widest flex items-center gap-1.5 border-b border-transparent">
@@ -139,11 +142,23 @@ export default function MarkerView({ packages, config, currentView, setCurrentVi
                                                 Rp {formatRupiah(totalNominal)}
                                             </span>
                                         )}
-                                        <span className="material-symbols-outlined text-slate-400 transition-transform duration-200" style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                        <button 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                if (window.confirm(`Hapus ${group.length} paket untuk ${group[0].nama || 'pelanggan ini'}?`)) {
+                                                    group.forEach(pkg => onRemoveMarker(pkg.resi))
+                                                }
+                                            }}
+                                            className="text-slate-400 hover:text-red-500 transition-colors p-1"
+                                            title="Hapus semua penanda paket ini"
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">delete</span>
+                                        </button>
+                                        <span className="material-symbols-outlined text-slate-400 transition-transform duration-200 ml-1" style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                                             expand_more
                                         </span>
                                     </div>
-                                </button>
+                                </div>
                                 
                                 {isExpanded && (
                                     <div className="flex flex-col gap-2 mt-1 animate-in slide-in-from-top-2 duration-200">
@@ -153,9 +168,29 @@ export default function MarkerView({ packages, config, currentView, setCurrentVi
                                                 pkg={pkg}
                                                 isBelumTtd={config.markerType === MARKER_BELUM_TTD}
                                                 onRemove={() => onRemoveMarker(pkg.resi)}
-                                                onKirimWA={() => handleKirimWA(pkg)}
                                             />
                                         ))}
+                                        
+                                        <div className="mt-2 flex gap-3">
+                                            <button 
+                                                onClick={() => handleKirimWAGroup(group)}
+                                                disabled={!group.some(p => p.telp)}
+                                                className={`flex-1 font-bold py-3 text-sm rounded-xl flex items-center justify-center gap-2 transition-transform shadow-sm ${group.some(p => p.telp) ? 'bg-primary text-white active:scale-[0.98]' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}`}
+                                            >
+                                                <span className="material-symbols-outlined text-[18px]">{config.markerType === MARKER_BELUM_TTD ? 'payments' : 'receipt_long'}</span>
+                                                <span>{config.markerType === MARKER_BELUM_TTD ? 'Tagih Pembayaran (WA)' : 'Konfirmasi via WA'}</span>
+                                            </button>
+                                            <button
+                                                disabled={!group.some(p => p.telp)}
+                                                onClick={() => {
+                                                    const p = group.find(x => x.telp);
+                                                    if(p) window.open(`tel:${konversiTelp(p.telp)}`, '_self');
+                                                }}
+                                                className={`size-12 shrink-0 rounded-xl flex items-center justify-center ${group.some(p => p.telp) ? 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700' : 'bg-slate-50 text-slate-300 cursor-not-allowed border border-slate-100'}`}
+                                            >
+                                                <span className="material-symbols-outlined text-[24px]">call</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 )}
                             </div>
