@@ -11,7 +11,6 @@ import {
     buildPesan, buildPesanPengiriman,
     konversiTelp
 } from './utils.js'
-import MapView from './components/MapView.jsx'
 import { fetchPieceOrderList, fetchUnmaskedPhone, fetchUnmaskedPhonesBulk } from './api.js'
 import { supabase } from './supabase.js'
 
@@ -356,7 +355,6 @@ export default function App() {
 
     /* ── Marker view config ── */
     const isMarkerView = currentView === MARKER_BELUM_TTD || currentView === MARKER_SUDAH_BAYAR
-    const isPetaView = currentView === 'peta'
     const mvConfig = {
         'belum-ttd': {
             title: 'Sudah Diantar, Belum Bayar',
@@ -393,36 +391,21 @@ export default function App() {
                             <span className="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
                         </button>
                         <h1 className="text-lg font-bold tracking-tight font-display">
-                            {currentView === 'retur' ? 'Konfirmasi Retur' : currentView === 'pengiriman' ? 'Konfirmasi Pengiriman' : currentView === 'peta' ? 'Peta Pelanggan' : currentMvConfig?.title || 'J&T Courier'}
+                            {currentView === 'retur' ? 'Konfirmasi Retur' : currentView === 'pengiriman' ? 'Konfirmasi Pengiriman' : currentMvConfig?.title || 'J&T Courier'}
                         </h1>
                     </div>
                     <div className="flex items-center gap-2">
-                        {currentView === 'peta' ? (
-                            <button className="w-10 h-10 flex items-center justify-center text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
-                                <span className="material-symbols-outlined text-[24px]">search</span>
-                            </button>
-                        ) : (
-                            <>
                                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                                     <span className="material-symbols-outlined text-primary text-[20px]">notifications</span>
                                 </div>
                                 <div className="w-8 h-8 rounded-full border border-slate-200 overflow-hidden bg-slate-100 flex items-center justify-center">
                                     <span className="material-symbols-outlined text-slate-400">person</span>
                                 </div>
-                            </>
-                        )}
                     </div>
                 </header>
 
 
                 <main className="flex-1 flex flex-col w-full max-w-md mx-auto relative pb-32">
-                    {/* ── Peta View ── */}
-                    {isPetaView && (
-                        <div className="flex-1 flex flex-col relative w-full h-full">
-                            <MapView packages={packagesWithMarkers} />
-                        </div>
-                    )}
-
                     {/* ── Marker Views ── */}
                     {isMarkerView && (
                         <div className="p-4">
@@ -438,7 +421,7 @@ export default function App() {
                     )}
 
                     {/* ── Retur / Pengiriman Views ── */}
-                    {!isMarkerView && !isPetaView && (
+                    {!isMarkerView && (
                         <div className="flex flex-col flex-1 w-full">
                             {/* Package List */}
                             <div className="w-full relative px-4 pt-4">

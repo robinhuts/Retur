@@ -4,7 +4,6 @@ export default function Sidebar({ currentView, setCurrentView, markerCounts }) {
     const menus = [
         { id: 'pengiriman', label: 'Beranda', icon: 'home' },
         { id: 'retur', label: 'Retur', icon: 'package_2' },
-        { id: 'peta', label: 'Peta', icon: 'map' },
         { id: 'belum-ttd', label: 'TTD', icon: 'draw', badge: markerCounts?.['belum-ttd'] || 0 },
         { id: 'sudah-bayar', label: 'Bayar', icon: 'payments', badge: markerCounts?.['sudah-bayar'] || 0 },
     ]

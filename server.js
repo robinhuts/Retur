@@ -138,36 +138,7 @@ app.post('/api/unmask-phones', express.json(), async (req, res) => {
     }
 })
 
-// ─── Route: Maposcope Route Optimization ────────────────────────────────────
-app.post('/api/route', express.json(), async (req, res) => {
-    try {
-        console.log('[/api/route] stops count:', req.body?.stops?.length)
 
-        const response = await fetch('https://r2.maposcope.com/routing/3/route/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'key': 'oisadfjo3242vmxetkej339safs2g1348cc2',
-                'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 16; 24069PC21G Build/BP2A.250605.031.A3)',
-                'Host': 'r2.maposcope.com',
-                'Connection': 'keep-alive',
-            },
-            body: JSON.stringify(req.body),
-        })
-
-        const text = await response.text()
-        console.log('[/api/route] status:', response.status, '| body:', text.slice(0, 300))
-
-        let json
-        try { json = JSON.parse(text) }
-        catch { return res.status(502).json({ error: 'Invalid JSON from Maposcope', raw: text.slice(0, 300) }) }
-
-        res.json(json)
-    } catch (err) {
-        console.error('[/api/route]', err.message)
-        res.status(502).json({ error: err.message })
-    }
-})
 
 // ─── Serve Frontend on VPS ────────────────────────────────────────────────
 if (!process.env.VERCEL) {
