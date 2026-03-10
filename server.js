@@ -3,6 +3,11 @@ import express from 'express'
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 import axios from 'axios'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const app = express()
 const PORT = process.env.SERVER_PORT || 3001
@@ -164,9 +169,20 @@ app.post('/api/route', express.json(), async (req, res) => {
     }
 })
 
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+// ─── Serve Frontend on VPS ────────────────────────────────────────────────
+if (!process.env.VERCEL) {
+    // Serve static files from the React build directory
+    app.use(express.static(path.join(__dirname, 'dist')))
+
+    // Catch-all handler for React Router and SPA reloading
+    app.use((req, res) => {
+        res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+    })
+
+    // Start the server natively
     app.listen(PORT, () => {
-        console.log(`[JnT Proxy] Listening on http://localhost:${PORT}`)
+        console.log(`[JnT Proxy] Server is running on http://localhost:${PORT}`)
+        console.log(`[JnT Proxy] Serving frontend from ${path.join(__dirname, 'dist')}`)
     })
 }
 

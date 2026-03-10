@@ -24,6 +24,7 @@ const MARKER_SUDAH_BAYAR = 'sudah-bayar'
 function loadMarkersCache() {
     try { return JSON.parse(localStorage.getItem(MARKERS_KEY) || '{}') }
     catch { return {} }
+
 }
 function saveMarkersCache(m) { localStorage.setItem(MARKERS_KEY, JSON.stringify(m)) }
 
@@ -69,7 +70,7 @@ export default function App() {
 
         const handleScroll = () => {
             setIsFabVisible(true)
-            
+
             if (scrollTimeoutRef.current) {
                 clearTimeout(scrollTimeoutRef.current)
             }
@@ -80,7 +81,7 @@ export default function App() {
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true })
-        
+
         // Initial timer start
         handleScroll()
 
@@ -481,10 +482,9 @@ export default function App() {
 
                 {/* ── One-Handed Action Bar (Only on Pengiriman List view) ── */}
                 {currentView === 'pengiriman' && (
-                    <div 
-                        className={`fixed left-4 right-4 z-40 max-w-md mx-auto transition-all duration-500 ease-in-out ${
-                            isFabVisible ? 'bottom-24 translate-y-0 opacity-100' : '-bottom-32 translate-y-full opacity-0 pointer-events-none'
-                        }`}
+                    <div
+                        className={`fixed left-4 right-4 z-40 max-w-md mx-auto transition-all duration-500 ease-in-out ${isFabVisible ? 'bottom-24 translate-y-0 opacity-100' : '-bottom-32 translate-y-full opacity-0 pointer-events-none'
+                            }`}
                     >
                         <div className="bg-white dark:bg-slate-900 p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-100 dark:border-slate-800 flex gap-3">
                             <button onClick={() => setCurrentView('belum-ttd')} className="flex-1 flex flex-col items-center justify-center py-3 bg-slate-100 dark:bg-slate-800 rounded-xl transition-all active:scale-95">
