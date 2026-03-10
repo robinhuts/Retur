@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e61920",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211111",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 justify-between">
+<div class="flex items-center gap-3">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Belum Bayar</h1>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<!-- Tabs -->
+<div class="flex px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent py-3 text-slate-500" href="#">
+<span class="text-sm font-semibold">Semua</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-primary py-3 text-primary" href="#">
+<span class="text-sm font-semibold">Belum Bayar</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent py-3 text-slate-500" href="#">
+<span class="text-sm font-semibold">Sudah Bayar</span>
+</a>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 p-4 space-y-4">
+<!-- Package Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Status Pengiriman</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold">SUDAH TTD</span>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold">BELUM BAYAR</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Total COD</span>
+<p class="text-lg font-bold text-primary">Rp 150.000</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="h-20 w-20 rounded-lg bg-cover bg-center shrink-0" data-alt="Courier package cardboard box with label" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIVqzdfvlbzor8KV85GgaYqeE9PwaoS3tl8a4NX85KoWBFcZyvam1cYswkErKEPJewlmO1K6HASyvr_MgbZykCrYEkWqjPhfW44hcLDFqDD_ByqnurOLIyWpg-TZRn3Xvcn2xQME6ATulQi_vH1-4mIAM94TCGMw0ggeiYDvZJ_YWuHpAtK4sx1AoUzi_Bn5rx9YcAkw7QvVxC6apUjZZk7wA6V9LklWUdGqJqt2CPVjSPQnT23A96eloRg-mI__4tJzyH5v3ovBk');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-tight">ID: PKG-99283471</h3>
+<p class="font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Budi Santoso</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-snug">Jl. Merdeka No. 10, Kel. Gambir, Kec. Gambir, Jakarta Pusat</p>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center text-slate-500 gap-1">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-xs font-medium">Metode: COD</span>
+</div>
+<button class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary py-2.5 px-4 text-white font-bold text-sm shadow-md active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+                        Tagih Pembayaran
+                    </button>
+</div>
+</div>
+</div>
+<!-- Package Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Status Pengiriman</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold">SUDAH TTD</span>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold">BELUM BAYAR</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Total COD</span>
+<p class="text-lg font-bold text-primary">Rp 45.500</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="h-20 w-20 rounded-lg bg-cover bg-center shrink-0" data-alt="Small courier envelope delivery package" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4qmhDi4pWQG4qAFsKg306jQBlbJymeDrnGyTdBJbq1tom77zYvdQrS7SOmosUHLcF5-mm_HK-KSTha407EjsUa1gaRTFNBsB7pf3DUnQdIo4sxD0XJGriDdQPOnz3zB4yMXohL4CoBtVkuGeKxiCFyZX3qo_b0QkYZLih8iRbMEYk15PmLWY1TSif5weWzriCIjPBrL-vNjDPb6g9V4fK8fHFd7MU3b25j7zOQtxCdDxXCd5VLOfAE7g_TA9jSugOab_e8Z9cmJE');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-tight">ID: PKG-88172635</h3>
+<p class="font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Siti Aminah</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-snug">Komplek Hijau Blok C3, Kel. Sukamaju, Depok</p>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center text-slate-500 gap-1">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-xs font-medium">Metode: COD</span>
+</div>
+<button class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary py-2.5 px-4 text-white font-bold text-sm shadow-md active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+                        Tagih Pembayaran
+                    </button>
+</div>
+</div>
+</div>
+<!-- Package Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Status Pengiriman</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold">SUDAH TTD</span>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold">BELUM BAYAR</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Total COD</span>
+<p class="text-lg font-bold text-primary">Rp 212.000</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="h-20 w-20 rounded-lg bg-cover bg-center shrink-0" data-alt="Courier box on delivery" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbjd2U1YEKu5JPvI7rRlwXcnYq-HV8U0Mk_sZdGJAQLtMZb_nCO0pL7JWx1tokjQdfw1nrXLnT6DR-BmHMDIHm52qQqpyvs5ypl6H_tBwgfwKXdbpUqqzcDlGz_rLBAen5j3VJ5wr9yE_iUVqgWnxXCQeIkTUH_MblWjwkqv74GgvhNohD0UT1K5rsWFa-JVCo7qU-hhXF4FOyPu1s3RgbXF3qfzSixLJ784PwVZxKqZpkQ5k_Ak1swHDnSPml29OxYciGh7D97k4');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-tight">ID: PKG-11223344</h3>
+<p class="font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Andi Wijaya</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-snug">Apartemen Skyview Tower B No 12-05, BSD City, Tangerang Selatan</p>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center text-slate-500 gap-1">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-xs font-medium">Metode: COD</span>
+</div>
+<button class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary py-2.5 px-4 text-white font-bold text-sm shadow-md active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+                        Tagih Pembayaran
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="sticky bottom-0 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-4 pb-6 pt-2">
+<div class="flex justify-around items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Beranda</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1" style="font-variation-settings: 'FILL' 1">assignment</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Tugas</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">history</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Riwayat</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Profil</p>
+</a>
+</div>
+</nav>
+</body></html>

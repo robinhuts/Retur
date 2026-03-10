@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e61920",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211111",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Konfirmasi Pengiriman</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications</span>
+</div>
+<img class="w-8 h-8 rounded-full border border-slate-200" data-alt="User profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYABdP-qseUCcZ6clx90i0dqH6azsh5K1cpjidQCykVyLmK66nBoz-lv_nlHcnlq9LpKOKiuvZbHkon3p8SdW0kliVKNSl4Iy7HT3PmAu5o8l7MDnociwfCogMYhlHlg7N1Ja2F9dGadFIQ-yJe2ii_vM79emF0VTozsR0bLmoYDYtiXM-wUan_l6SAMlCgiX3r7bV4-PIy8YGAMJn6AQB8pwcDwjyqVIhc53AJk-mxSnosWE9TZEakAefE2cTaPGoCwvi0GHn038"/>
+</div>
+</header>
+<!-- Search & Filter Section -->
+<div class="p-4 space-y-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl focus:ring-2 focus:ring-primary/50 text-sm shadow-sm" placeholder="Cari Nama Penerima atau Resi" type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="flex items-center gap-1 px-4 py-2 bg-primary text-white rounded-full text-xs font-semibold whitespace-nowrap shadow-md shadow-primary/20">
+                Semua <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-1 px-4 py-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700 whitespace-nowrap">
+                Reguler <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-1 px-4 py-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700 whitespace-nowrap">
+                Ekonomi <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-1 px-4 py-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700 whitespace-nowrap">
+                COD <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Main List Section -->
+<main class="flex-1 px-4 space-y-4 pb-40">
+<div class="flex items-center justify-between">
+<h2 class="text-base font-bold">Daftar Paket (24)</h2>
+<button class="text-primary text-sm font-semibold">Pilih Semua</button>
+</div>
+<!-- Package Cards -->
+<div class="space-y-3">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded">JT129304857</span>
+<h3 class="text-base font-bold mt-1">Ahmad Muari</h3>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 font-medium">COD Amount</p>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Rp 125.000</p>
+</div>
+</div>
+<div class="flex items-start gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-lg">location_on</span>
+<p class="text-xs text-slate-500 leading-relaxed">Jl. Kebon Jeruk No. 12, RT 05/03, Palmerah, Jakarta Barat, 11480</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center justify-center gap-1 border border-slate-200 dark:border-slate-600">
+<span class="material-symbols-outlined text-sm">map</span> Lihat Map
+                    </button>
+<button class="flex-1 py-2 rounded-lg bg-primary text-white text-xs font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Konfirmasi
+                    </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded">JT129304112</span>
+<h3 class="text-base font-bold mt-1">Siti Aminah</h3>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 font-medium">Layanan</p>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Reguler</p>
+</div>
+</div>
+<div class="flex items-start gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-lg">location_on</span>
+<p class="text-xs text-slate-500 leading-relaxed">Gg. Haji Mushonif No. 44, Kembangan Selatan, Jakarta Barat</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center justify-center gap-1 border border-slate-200 dark:border-slate-600">
+<span class="material-symbols-outlined text-sm">map</span> Lihat Map
+                    </button>
+<button class="flex-1 py-2 rounded-lg bg-primary text-white text-xs font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Konfirmasi
+                    </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded">JT129304990</span>
+<h3 class="text-base font-bold mt-1">Budi Santoso</h3>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 font-medium">COD Amount</p>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Rp 45.000</p>
+</div>
+</div>
+<div class="flex items-start gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-lg">location_on</span>
+<p class="text-xs text-slate-500 leading-relaxed">Perumahan Villa Meruya Blok C3/12, Meruya Utara, Jakarta Barat</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center justify-center gap-1 border border-slate-200 dark:border-slate-600">
+<span class="material-symbols-outlined text-sm">map</span> Lihat Map
+                    </button>
+<button class="flex-1 py-2 rounded-lg bg-primary text-white text-xs font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Konfirmasi
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- One-Handed Action Bar (Floating above nav) -->
+<div class="fixed bottom-20 left-4 right-4 z-40">
+<div class="bg-white dark:bg-slate-900 p-3 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 flex gap-3">
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-slate-100 dark:bg-slate-800 rounded-xl transition-all active:scale-95">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 mb-1">draw</span>
+<span class="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Belum Di TTD</span>
+<span class="text-sm font-bold text-slate-900 dark:text-slate-100">12 Paket</span>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-primary text-white rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-95">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="text-[10px] font-bold text-white/80 uppercase tracking-wide">Sudah Bayar</span>
+<span class="text-sm font-bold">8 Paket</span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-6 py-2 pb-6 flex items-center justify-between z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-medium">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-medium">Riwayat</span>
+</a>
+<div class="relative -top-4">
+<div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/40 text-white border-4 border-background-light dark:border-background-dark">
+<span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+</div>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-[10px] font-medium">Pesan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profil</span>
+</a>
+</nav>
+</body></html>
