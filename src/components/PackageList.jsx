@@ -23,13 +23,7 @@ function PackageCard({ pkg, isSelected, currentMarker, currentView, onSelect, on
                 ? 'border-teal-400 bg-teal-50/30'
                 : 'border-slate-100 dark:border-slate-700 hover:border-primary/30'
 
-    const handleKirimPengiriman = () => {
-        if (!pkg.telp) return
-        const pesan = buildPesanPengiriman(pkg)
-        const nomor = konversiTelp(pkg.telp)
-        const encoded = encodeURIComponent(pesan)
-        window.open(`https://wa.me/${nomor}?text=${encoded}`, '_blank', 'noopener,noreferrer')
-    }
+
 
     return (
         <div 
@@ -79,13 +73,7 @@ function PackageCard({ pkg, isSelected, currentMarker, currentView, onSelect, on
                 </div>
             ) : (
                 <div className="flex flex-col gap-2 border-t border-slate-100 dark:border-slate-700 pt-3 mt-1">
-                    <button
-                        onClick={(e) => { e.stopPropagation(); handleKirimPengiriman() }}
-                        disabled={!pkg.telp}
-                        className={`w-full py-2.5 rounded-lg text-white text-[13px] font-semibold flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all shadow-sm ${pkg.telp ? 'bg-primary shadow-primary/20 hover:bg-opacity-90' : 'bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed'}`}
-                    >
-                        <span className="material-symbols-outlined text-[18px]">send</span> {pkg.telp ? 'Kirim WA Pengiriman' : 'No. HP Tidak Tersedia'}
-                    </button>
+
 
                     <div className="flex gap-2">
                         <button
@@ -174,6 +162,15 @@ export default function PackageList({ packages, loading, error, selectedResis = 
         }))
     }
 
+    const handleKirimPengirimanGroup = (groupArray) => {
+        const pkgWithPhone = groupArray.find(p => p.telp) || groupArray[0]
+        if (!pkgWithPhone.telp) { showToast?.('No. HP tidak tersedia', 'warn'); return }
+        const pesan = buildPesanPengiriman(groupArray)
+        const nomor = konversiTelp(pkgWithPhone.telp)
+        window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, '_blank', 'noopener,noreferrer')
+        showToast?.('WhatsApp sedang dibuka...', 'info')
+    }
+
     if (loading) {
         return (
             <div className="flex flex-col gap-3">
@@ -252,15 +249,34 @@ export default function PackageList({ packages, loading, error, selectedResis = 
                         if (group.length === 1) {
                             const pkg = group[0]
                             return (
-                                <PackageCardMemo
-                                    key={pkg.resi}
-                                    pkg={pkg}
-                                    isSelected={selectedResis.includes(pkg.resi)}
-                                    currentMarker={pkg.marker || null}
-                                    currentView={currentView}
-                                    onSelect={onSelect}
-                                    onToggleMarker={onToggleMarker}
-                                />
+                                <div key={pkg.resi} className="flex flex-col gap-2">
+                                    <PackageCardMemo
+                                        pkg={pkg}
+                                        isSelected={selectedResis.includes(pkg.resi)}
+                                        currentMarker={pkg.marker || null}
+                                        currentView={currentView}
+                                        onSelect={onSelect}
+                                        onToggleMarker={onToggleMarker}
+                                    />
+                                    {currentView !== 'retur' && (
+                                        <div className="flex gap-2 mb-2">
+                                            <button
+                                                onClick={() => handleKirimPengirimanGroup([pkg])}
+                                                disabled={!pkg.telp}
+                                                className={`flex-1 py-2.5 rounded-xl text-[13px] font-semibold flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all shadow-sm ${pkg.telp ? 'bg-primary text-white shadow-primary/20 bg-opacity-90' : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-200 dark:border-slate-700'}`}
+                                            >
+                                                <span className="material-symbols-outlined text-[18px]">send</span> {pkg.telp ? 'Kirim WA Pengiriman' : 'No. HP Tidak Tersedia'}
+                                            </button>
+                                            <button
+                                                disabled={!pkg.telp}
+                                                onClick={() => pkg.telp && window.open(`tel:${konversiTelp(pkg.telp)}`, '_self')}
+                                                className={`size-[42px] shrink-0 rounded-xl flex items-center justify-center transition-colors ${pkg.telp ? 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50' : 'bg-slate-50 text-slate-300 cursor-not-allowed border border-slate-100 dark:border-slate-800'}`}
+                                            >
+                                                <span className="material-symbols-outlined text-[20px]">call</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             )
                         }
 
@@ -269,9 +285,11 @@ export default function PackageList({ packages, loading, error, selectedResis = 
                         
                         return (
                             <div key={`group-${idx}`} className="bg-slate-100 dark:bg-slate-900/40 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col gap-2 shadow-inner">
-                                <button 
+                                <div 
                                     onClick={() => toggleGroup(idx)}
-                                    className="px-2 pt-1 pb-1 flex justify-between items-center w-full text-left"
+                                    role="button"
+                                    tabIndex={0}
+                                    className="px-2 pt-1 pb-1 flex justify-between items-center w-full text-left cursor-pointer"
                                 >
                                     <span className="flex flex-col">
                                         <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-widest flex items-center gap-1.5 border-b border-transparent">
@@ -283,7 +301,7 @@ export default function PackageList({ packages, loading, error, selectedResis = 
                                     <span className="material-symbols-outlined text-slate-400 transition-transform duration-200" style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                                         expand_more
                                     </span>
-                                </button>
+                                </div>
                                 
                                 {isExpanded && (
                                     <div className="flex flex-col gap-2 mt-1 animate-in slide-in-from-top-2 duration-200">
@@ -298,6 +316,29 @@ export default function PackageList({ packages, loading, error, selectedResis = 
                                                 onToggleMarker={onToggleMarker}
                                             />
                                         ))}
+                                        
+                                        {currentView !== 'retur' && (
+                                            <div className="mt-2 flex gap-3">
+                                                <button 
+                                                    onClick={() => handleKirimPengirimanGroup(group)}
+                                                    disabled={!group.some(p => p.telp)}
+                                                    className={`flex-1 font-bold py-3 text-sm rounded-xl flex items-center justify-center gap-2 transition-transform shadow-sm ${group.some(p => p.telp) ? 'bg-primary text-white active:scale-[0.98]' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}`}
+                                                >
+                                                    <span className="material-symbols-outlined text-[18px]">send</span>
+                                                    <span>Kirim WA Pengiriman</span>
+                                                </button>
+                                                <button
+                                                    disabled={!group.some(p => p.telp)}
+                                                    onClick={() => {
+                                                        const p = group.find(x => x.telp);
+                                                        if(p) window.open(`tel:${konversiTelp(p.telp)}`, '_self');
+                                                    }}
+                                                    className={`size-12 shrink-0 rounded-xl flex items-center justify-center ${group.some(p => p.telp) ? 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700' : 'bg-slate-50 text-slate-300 cursor-not-allowed border border-slate-100'}`}
+                                                >
+                                                    <span className="material-symbols-outlined text-[24px]">call</span>
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>
