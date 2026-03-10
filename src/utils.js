@@ -27,15 +27,33 @@ Apakah paket ini benar diretur?
 Terima kasih \uD83D\uDE4F`
 }
 
-export function buildPesanTagihCOD({ resi, nama, nominal }) {
-    const nominalFmt = nominal ? formatRupiah(nominal) : '____________'
-    const namaUpper = nama ? nama.toUpperCase() : '____________'
-    return `Halo Kak【${namaUpper}】,\nSaya kurir J&T Express yang tadi mengantar paket Anda.\n\nNomor resi: ${resi || '____________'}\nNominal COD: Rp ${nominalFmt}\n\nMohon segera lakukan pembayaran COD / transfer ya Kak, karena paket sudah diterima.\nTerima kasih 🙏`
+export function buildPesanTagihCOD(packagesList) {
+    const packages = Array.isArray(packagesList) ? packagesList : [packagesList]
+    if (!packages || packages.length === 0) return ''
+
+    const firstPkg = packages.find(p => p.telp) || packages[0]
+    const namaUpper = firstPkg.nama ? firstPkg.nama.toUpperCase() : '____________'
+    
+    const resis = packages.map(p => p.resi || '____________').join(', ')
+    const totalCod = packages.reduce((sum, p) => sum + (parseInt(p.nominal) || 0), 0)
+    const nominalFmt = totalCod > 0 ? formatRupiah(totalCod) : '0'
+
+    const paketText = packages.length > 1 ? `${packages.length} paket` : `paket`
+
+    return `Halo Kak【${namaUpper}】,\nSaya kurir J&T Express yang tadi mengantar ${paketText} Anda.\n\nNomor resi: ${resis}\nNominal COD: Rp ${nominalFmt}\n\nMohon segera lakukan pembayaran COD / transfer ya Kak, karena paket sudah diterima.\nTerima kasih 🙏`
 }
 
-export function buildPesanTTD({ resi, nama }) {
-    const namaUpper = nama ? nama.toUpperCase() : '____________'
-    return `Halo Kak【${namaUpper}】,\nSaya kurir J&T Express yang akan mengantar paket Anda hari ini.\n\nNomor resi: ${resi || '____________'}\n\nMohon bersiap ya Kak, paket sedang dalam perjalanan ke lokasi Anda.\nTerima kasih 🙏`
+export function buildPesanTTD(packagesList) {
+    const packages = Array.isArray(packagesList) ? packagesList : [packagesList]
+    if (!packages || packages.length === 0) return ''
+
+    const firstPkg = packages.find(p => p.telp) || packages[0]
+    const namaUpper = firstPkg.nama ? firstPkg.nama.toUpperCase() : '____________'
+    
+    const resis = packages.map(p => p.resi || '____________').join(', ')
+    const paketText = packages.length > 1 ? `${packages.length} paket` : `paket`
+
+    return `Halo Kak【${namaUpper}】,\nSaya kurir J&T Express yang akan mengantar ${paketText} Anda hari ini.\n\nNomor resi: ${resis}\n\nMohon bersiap ya Kak, paket sedang dalam perjalanan ke lokasi Anda.\nTerima kasih 🙏`
 }
 
 export function buildPesanPengiriman(packagesList) {
