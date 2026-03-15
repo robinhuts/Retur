@@ -1,4 +1,5 @@
 import { konversiTelp } from '../utils'
+import { Package, CheckCircle, AlertCircle } from 'lucide-react'
 
 const FIELDS = [
     { id: 'resi', label: 'Nominal Resi', placeholder: 'Contoh: JT0012345678', type: 'text', inputMode: 'text' },
@@ -9,10 +10,10 @@ const FIELDS = [
 
 export default function ReturnForm({ values, errors, onChange }) {
     return (
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-4 border border-slate-100 dark:border-slate-700">
-            <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary text-[18px]">local_shipping</span>
+        <div className="bg-white dark:bg-surface-dark rounded-xl shadow-sm p-5 border border-slate-100 dark:border-slate-800">
+            <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-5 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Package size={20} className="text-primary" />
                 </div>
                 Data Pengiriman Retur
             </h2>
@@ -20,7 +21,7 @@ export default function ReturnForm({ values, errors, onChange }) {
             <div className="flex flex-col gap-4">
                 {FIELDS.map(({ id, label, placeholder, type, inputMode }) => (
                     <div className="flex flex-col" key={id}>
-                        <label htmlFor={id} className="text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5 flex justify-between">
+                        <label htmlFor={id} className="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 flex justify-between">
                             <span>{label} <span className="text-primary">*</span></span>
                         </label>
                         <input
@@ -30,23 +31,19 @@ export default function ReturnForm({ values, errors, onChange }) {
                             placeholder={placeholder}
                             autoComplete="off"
                             value={values[id]}
-                            className={`w-full px-4 py-3 border rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-900/50 transition-all outline-none placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-primary/20 ${errors[id]
-                                ? 'border-red-400 focus:border-red-500 bg-red-50/50 dark:bg-red-900/10'
-                                : 'border-slate-200 dark:border-slate-700 focus:border-primary'
-                                }`}
+                            className={`input-field ${errors[id] ? 'error' : ''}`}
                             onChange={e => onChange(id, e.target.value)}
                         />
 
-                        {/* Phone live preview */}
-                        {id === 'telp' && values.telp && (
-                            <div className="text-[10px] text-green-600 dark:text-green-500 font-bold mt-1.5 min-h-[16px] flex items-center gap-1">
-                                <span className="material-symbols-outlined text-[14px]">check_circle</span> Format WA: +{konversiTelp(values.telp)}
+                        {id === 'telp' && values.telp && !errors.telp && (
+                            <div className="text-[11px] text-emerald-600 dark:text-emerald-500 font-semibold mt-2 flex items-center gap-1.5">
+                                <CheckCircle size={14} /> Format WA: +{konversiTelp(values.telp)}
                             </div>
                         )}
 
                         {errors[id] && (
-                            <div className="text-[10px] text-red-500 dark:text-red-400 font-bold mt-1.5 flex items-center gap-1 animate-[fadeIn_0.2s_ease]">
-                                <span className="material-symbols-outlined text-[14px]">warning</span> {errors[id]}
+                            <div className="text-[11px] text-red-500 dark:text-red-400 font-semibold mt-2 flex items-center gap-1.5">
+                                <AlertCircle size={14} /> {errors[id]}
                             </div>
                         )}
                     </div>

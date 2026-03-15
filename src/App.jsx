@@ -13,6 +13,7 @@ import {
 } from './utils.js'
 import { fetchPieceOrderList, fetchUnmaskedPhone, fetchUnmaskedPhonesBulk } from './api.js'
 import { supabase } from './supabase.js'
+import { ArrowLeft, Bell, User } from 'lucide-react'
 
 const EMPTY_FORM = { resi: '', nama: '', telp: '', nominal: '', address: '', jmlPaket: 0 }
 const MARKERS_KEY = 'jnt_package_markers'
@@ -385,22 +386,22 @@ export default function App() {
         <ErrorBoundary onReset={loadPackages}>
             <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-sans antialiased">
                 {/* ── Top Header ── */}
-                <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between shadow-sm">
+                <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#1a1a1a]/95 backdrop-blur-lg border-b border-slate-200/80 dark:border-slate-800/80 px-4 py-3 flex items-center justify-between shadow-sm">
                     <div className="flex items-center gap-3">
-                        <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <span className="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+                        <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                            <ArrowLeft size={22} className="text-slate-700 dark:text-slate-300" />
                         </button>
                         <h1 className="text-lg font-bold tracking-tight font-display">
                             {currentView === 'retur' ? 'Konfirmasi Retur' : currentView === 'pengiriman' ? 'Konfirmasi Pengiriman' : currentMvConfig?.title || 'J&T Courier'}
                         </h1>
                     </div>
                     <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-primary text-[20px]">notifications</span>
-                                </div>
-                                <div className="w-8 h-8 rounded-full border border-slate-200 overflow-hidden bg-slate-100 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-slate-400">person</span>
-                                </div>
+                        <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                            <Bell size={20} className="text-slate-600 dark:text-slate-400" />
+                        </button>
+                        <button className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                            <User size={20} className="text-primary" />
+                        </button>
                     </div>
                 </header>
 
@@ -445,12 +446,12 @@ export default function App() {
                                         <ReturnForm values={values} errors={errors} onChange={handleChange} />
                                     </div>
 
-                                    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-4 border border-slate-100 dark:border-slate-700">
-                                        <div className="flex items-center justify-between mb-3">
-                                            <span className="text-[0.75rem] font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
-                                                <span className="material-symbols-outlined text-[16px]">chat</span> Preview Pesan
+                                    <div className="bg-white dark:bg-surface-dark rounded-xl shadow-sm p-5 border border-slate-100 dark:border-slate-800">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Preview Pesan
                                             </span>
-                                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[0.62rem] font-bold ${isReady ? 'bg-green-500 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                                            <span className={`badge ${isReady ? 'badge-success' : 'badge-neutral'}`}>
                                                 {isReady ? 'Siap kirim' : 'Belum diisi'}
                                             </span>
                                         </div>
@@ -469,16 +470,16 @@ export default function App() {
                         className={`fixed left-4 right-4 z-40 max-w-md mx-auto transition-all duration-500 ease-in-out ${isFabVisible ? 'bottom-24 translate-y-0 opacity-100' : '-bottom-32 translate-y-full opacity-0 pointer-events-none'
                             }`}
                     >
-                        <div className="bg-white dark:bg-slate-900 p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-100 dark:border-slate-800 flex gap-3">
-                            <button onClick={() => setCurrentView('belum-ttd')} className="flex-1 flex flex-col items-center justify-center py-3 bg-slate-100 dark:bg-slate-800 rounded-xl transition-all active:scale-95">
-                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400 mb-1">draw</span>
-                                <span className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wide text-center leading-tight">Diantar<br />Belum Bayar</span>
-                                <span className="text-sm font-bold text-slate-900 dark:text-slate-100">{markerCounts[MARKER_BELUM_TTD]} Paket</span>
+                        <div className="bg-white dark:bg-[#1a1a1a] p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-slate-200/80 dark:border-slate-800/80 flex gap-3">
+                            <button onClick={() => setCurrentView('belum-ttd')} className="flex-1 flex flex-col items-center justify-center py-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl transition-all active:scale-95 hover:bg-amber-100 dark:hover:bg-amber-900/30">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600 dark:text-amber-500 mb-1"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+                                <span className="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide text-center leading-tight">Diantar<br />Belum Bayar</span>
+                                <span className="text-sm font-bold text-amber-900 dark:text-amber-300 mt-0.5">{markerCounts[MARKER_BELUM_TTD]} Paket</span>
                             </button>
-                            <button onClick={() => setCurrentView('sudah-bayar')} className="flex-1 flex flex-col items-center justify-center py-3 bg-primary text-white rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-95">
-                                <span className="material-symbols-outlined mb-1">payments</span>
+                            <button onClick={() => setCurrentView('sudah-bayar')} className="flex-1 flex flex-col items-center justify-center py-3 bg-primary text-white rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-95 hover:bg-primary-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-1"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
                                 <span className="text-[10px] font-bold text-white/90 uppercase tracking-wide text-center leading-tight">Bayar<br />Belum Diantar</span>
-                                <span className="text-sm font-bold">{markerCounts[MARKER_SUDAH_BAYAR]} Paket</span>
+                                <span className="text-sm font-bold mt-0.5">{markerCounts[MARKER_SUDAH_BAYAR]} Paket</span>
                             </button>
                         </div>
                     </div>
